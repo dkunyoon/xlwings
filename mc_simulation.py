@@ -2,6 +2,8 @@
 
 import xlwings as xw
 import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 def monte_carlo():
 
@@ -35,6 +37,17 @@ def monte_carlo():
     mc["I5"].options(transpose=True).value = np.mean(results, axis=0)
     mc["J5"].options(transpose=True).value = np.median(results, axis=0)
     mc["I7"].value = sum(results[:, 0] < 1) / sims
+
+    # add chart
+    fig = plt.figure(figsize=(12, 8))
+    sns.distplot(results[:,0], hist=False, kde=True, rug=True, label="KDE")
+    plt.vlines(np.median(results[:,0]), ymin=0, ymax=1, linestyles="--", label="P50")
+    plt.title("Simulation - Investment Multiple", fontsize=20)
+    plt.xlabel("Multiple", fontsize=15)
+    plt.legend(fontsize=15)
+
+    mc.pictures.add(fig, name="Multiple", update=True,
+                    left=mc["G10"].left, top=mc["G10"].top, scale=0.43)
 
 
 def restore():
