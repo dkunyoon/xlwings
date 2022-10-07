@@ -29,6 +29,8 @@ def main():
                          data_source="yahoo", start=start, end=end).Close
     df.rename(columns={benchmark: benchmark.replace("^", "")}, inplace=True)
     benchmark = benchmark.replace("^", "")
+    
+    df.dropna(inplace=True)
 
     # create chart
     chart = plt.figure(figsize=(19, 8))
