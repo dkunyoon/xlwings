@@ -10,7 +10,7 @@ plt.style.use("seaborn")
 
 def main():
 
-    # connect
+    # connect to excel workbook
     wb = xw.Book.caller()
 
     # define sheets
