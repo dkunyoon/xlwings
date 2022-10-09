@@ -25,10 +25,13 @@ def main():
     freq = db_s.range("K39").value
 
     # load stock data and create df
-    df = data.DataReader(name=[symbol, benchmark],
-                         data_source="yahoo", start=start, end=end).Close
+    df = data.DataReader(name=[symbol, benchmark], data_source="yahoo",
+                         start=start, end=end).Close
     df.rename(columns={benchmark: benchmark.replace("^", "")}, inplace=True)
+    df.rename(columns={symbol: symbol.split(".")[0]}, inplace=True)
+    
     benchmark = benchmark.replace("^", "")
+    symbol = symbol.split(".")[0]
     
     df.dropna(inplace=True)
 
