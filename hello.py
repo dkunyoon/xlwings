@@ -18,7 +18,9 @@ def hello(name):
 
 
 @xw.func
+@xw.arg("number", doc="This is an integer or float")
 def squareroot(number):
+    ''' returns the square root of a number '''
     return np.sqrt(number)
 
 
@@ -74,6 +76,6 @@ def dfsum2(data):
 
 @xw.func
 @xw.arg("data", pd.DataFrame, expand = "table", index = False, header = False)
-@xw.ret(expand = "table")
+@xw.ret(expand = "table", index=False, header=False)
 def addone(data):
     return data.add(1)
